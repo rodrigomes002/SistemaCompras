@@ -25,12 +25,7 @@ namespace SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra
                 throw new BusinessRuleException("A solicitação de compra deve possuir itens!");
 
             var solicitacaoCompra = new SolicitacaoAgg.SolicitacaoCompra(request.UsuarioSolicitante, request.NomeFornecedor);
-            
-            Parallel.ForEach(request.Itens, item =>
-            {
-                solicitacaoCompra.AdicionarItem(item.Produto, item.Qtde);
-            });
-
+            solicitacaoCompra.RegistrarCompra(request.Itens);
             solicitacaoRepository.RegistrarCompra(solicitacaoCompra);
 
             Commit();
