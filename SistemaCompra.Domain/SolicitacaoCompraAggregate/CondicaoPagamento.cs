@@ -1,5 +1,4 @@
 ﻿using SistemaCompra.Domain.Core;
-using System;
 using System.Collections.Generic;
 
 namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
