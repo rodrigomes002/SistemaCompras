@@ -21,9 +21,6 @@ namespace SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra
 
         public Task<bool> Handle(RegistrarCompraCommand request, CancellationToken cancellationToken)
         {
-            if (request.Itens.Count == 0)
-                throw new BusinessRuleException("A solicitação de compra deve possuir itens!");
-
             var solicitacaoCompra = new SolicitacaoAgg.SolicitacaoCompra(request.UsuarioSolicitante, request.NomeFornecedor);
             solicitacaoCompra.RegistrarCompra(request.Itens);
             solicitacaoRepository.RegistrarCompra(solicitacaoCompra);
