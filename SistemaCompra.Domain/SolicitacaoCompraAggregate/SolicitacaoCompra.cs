@@ -1,10 +1,9 @@
-﻿using SistemaCompra.Domain.Core;
+﻿using MediatR;
+using SistemaCompra.Domain.Core;
 using SistemaCompra.Domain.Core.Model;
 using SistemaCompra.Domain.ProdutoAggregate;
-using SistemaCompra.Domain.SolicitacaoCompraAggregate.Events;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
 {

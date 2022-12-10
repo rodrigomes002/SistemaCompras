@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore.Internal;
+using SistemaCompra.Domain.Core;
 using SistemaCompra.Domain.SolicitacaoCompraAggregate;
 using SistemaCompra.Infra.Data.UoW;
 using System.Threading;
@@ -19,7 +21,16 @@ namespace SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra
 
         public Task<bool> Handle(RegistrarCompraCommand request, CancellationToken cancellationToken)
         {
+            if (request.Itens.Count == 0)
+                throw new BusinessRuleException("A solicitação de compra deve possuir itens!");
+
             var solicitacaoCompra = new SolicitacaoAgg.SolicitacaoCompra(request.UsuarioSolicitante, request.NomeFornecedor);
+            
+            Parallel.ForEach(request.Itens, item =>
+            {
+                solicitacaoCompra.AdicionarItem(item.Produto, item.Qtde);
+            });
+
             solicitacaoRepository.RegistrarCompra(solicitacaoCompra);
 
             Commit();
