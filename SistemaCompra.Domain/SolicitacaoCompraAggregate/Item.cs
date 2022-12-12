@@ -1,8 +1,6 @@
 ﻿using SistemaCompra.Domain.Core.Model;
 using SistemaCompra.Domain.ProdutoAggregate;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
 {
@@ -15,6 +13,7 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
 
         public Item(Produto produto, int qtde)
         {
+            Id = Guid.NewGuid();
             Produto = produto ?? throw new ArgumentNullException(nameof(produto));
             Qtde = qtde;
         }
